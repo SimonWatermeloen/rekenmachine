@@ -1,0 +1,104 @@
+function main() {
+    var x;
+    
+    window.alert("hoeveel getallen wilt u sorteren?");
+    x = window.prompt('Enter a value for x');
+    var i;
+    var getal = createArray(x);
+    
+    for (i = 0; i <= x - 1; i++) {
+        getal[i] = Math.floor(Math.random() * 100);
+        window.alert(getal[i].ToString() + " ");
+    }
+    var opslaan;
+    var door;
+    
+    door = true;
+    var nietsveranderd;
+    
+    nietsveranderd = 1;
+    i = 0;
+    while (door) {
+        if (getal[i] < getal[i + 1]) {
+            opslaan = getal[i + 1];
+            getal[i + 1] = getal[i];
+            getal[i] = opslaan;
+        } else {
+            nietsveranderd = nietsveranderd + 1;
+        }
+        i = i + 1;
+        if (nietsveranderd == x && i == x - 1) {
+            door = false;
+        } else {
+            door = true;
+            if (i == x - 1) {
+                i = 0;
+                nietsveranderd = 1;
+            }
+        }
+    }
+    window.alert("gesorteerd:");
+    i = 0;
+    for (i = 0; i <= x - 1; i++) {
+        window.alert(getal[i].ToString() + " ");
+    }
+    var links;
+    
+    links = 0;
+    var rechts;
+    
+    rechts = x;
+    var midden;
+    
+    midden = (double) x / 2;
+    nietsveranderd = 0;
+    var getalzoeken;
+    
+    window.alert("Welk getal wilt u zoeken?");
+    getalzoeken = window.prompt('Enter a value for getalzoeken');
+    var verschilover;
+    
+    door = true;
+    while (door) {
+        verschilover = rechts - links;
+        if (getal[midden] < getalzoeken) {
+            if (3 < verschilover) {
+                midden = (double) (links + midden) / 2;
+                rechts = midden;
+            } else {
+                if (midden == 0 || verschilover == -1) {
+                    door = false;
+                } else {
+                    midden = midden - 1;
+                    rechts = midden;
+                }
+            }
+        } else {
+            if (3 < verschilover) {
+                midden = (double) (midden + rechts) / 2;
+                links = midden;
+            } else {
+                if (midden == x - 1 || verschilover == -1) {
+                    door = false;
+                } else {
+                    midden = midden + 1;
+                    links = midden;
+                }
+            }
+        }
+        window.alert(getal[midden]);
+        window.alert("getalgevraagd = " + getalzoeken);
+        if (getalzoeken == getal[midden] || door == false) {
+            door = false;
+        } else {
+            if (verschilover < -2) {
+                door = false;
+            }
+        }
+    }
+    if (getalzoeken != getal[midden]) {
+        window.alert("getal niet gevonden");
+    } else {
+        window.alert("U getal staat op plek " + midden);
+    }
+}
